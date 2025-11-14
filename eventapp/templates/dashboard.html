@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        .light {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+            border: 2px solid #444;
+        }
+        .light-off {
+            background-color: #777;
+        }
+        .light-on {
+            background-color: #4caf50;
+        }
+        .match-light-row {
+            display: flex;
+            align-items: center;
+            margin: 4px 0;
+        }
+        .match-light-row span {
+            margin-left: 4px;
+        }
+    </style>
+
+    <h2>Your Valentine Dashboard 🌹</h2>
+
+    <p>Welcome, {{ user.username }}!</p>
+
+    <h3>Your Personality Quiz 💭</h3>
+    {% if has_quiz %}
+        <p>✅ You’ve already submitted your personality quiz. Thank you!</p>
+    {% else %}
+        <p>You haven't taken the quiz yet.</p>
+        <p><a href="{% url 'personality_quiz' %}">Take your personality quiz now</a></p>
+    {% endif %}
+
+    <h3>Your Top 3 Matches 💘</h3>
+    {% if has_matches %}
+        <ol>
+            {% for result in matches %}
+                <li>
+                    {{ result.match.username }}
+                    (score: {{ result.score|floatformat:2 }})
+                </li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>Matches are not available yet.</p>
+        <p>
+            Once enough people have completed the quiz, we’ll run the matching
+            and your top 3 matches will appear here automatically.
+        </p>
+    {% endif %}
+
+    <h3>Event Lights</h3>
+    {% if has_matches %}
+        {% for item in match_statuses %}
+            <div class="match-light-row">
+                <div class="light {% if item.is_checked_in %}light-on{% else %}light-off{% endif %}"></div>
+                <span>
+                    Match {{ forloop.counter }} —
+                    {% if item.is_checked_in %}
+                        Checked in ✅
+                    {% else %}
+                        Not checked in yet 🔴
+                    {% endif %}
+                </span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Lights will appear once matches are available.</p>
+    {% endif %}
+{% endblock %}

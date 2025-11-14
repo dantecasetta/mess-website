@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mess Matchmaking</title>
+</head>
+<body>
+    <h1>Welcome to the Matchmaking Event 💘</h1>
+    <p>If you’re seeing this, your custom template is working.</p>
+</body>
+</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Welcome to the Matchmaking Event 💘</h2>
+    <p>This will be your Valentine’s Day matchmaking portal.</p>
+
+    {% if user.is_authenticated %}
+        <p>Ready to see your matches? Go to your <a href="{% url 'dashboard' %}">dashboard</a>.</p>
+    {% else %}
+        <p>
+            <a href="{% url 'signup' %}">Create an account</a> or
+            <a href="{% url 'login' %}">log in</a> to join the event.
+        </p>
+    {% endif %}
+{% endblock %}

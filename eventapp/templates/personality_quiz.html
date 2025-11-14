@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Personality Quiz 💌</h2>
+    <p>Answer honestly! You can only submit this once.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Submit my answers</button>
+    </form>
+{% endblock %}

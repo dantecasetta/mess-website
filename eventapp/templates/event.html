@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Night</title>
+    <meta http-equiv="refresh" content="300">
+    <style>
+        .light {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 10px;
+            border: 2px solid #444;
+        }
+        .light-off {
+            background-color: #777;
+        }
+        .light-on {
+            background-color: #4caf50;
+        }
+        .match-box {
+            display: inline-block;
+            text-align: center;
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Event Night</h1>
+    <p>These three lights represent your top 3 matches. A light turns on when a match has checked in.</p>
+
+    {% if match_statuses %}
+        <div>
+            {% for item in match_statuses %}
+                <div class="match-box">
+                    <div class="light {% if item.is_checked_in %}light-on{% else %}light-off{% endif %}"></div>
+                    <div>Match {{ forloop.counter }}</div>
+                    <!-- Optional: show names -->
+                    <!-- <div>{{ item.match.match.first_name }}</div> -->
+                </div>
+            {% endfor %}
+        </div>
+
+        <p style="margin-top: 20px; font-size: 0.9em;">
+            This page refreshes every 10 minutes to update your matches’ check-in status.
+        </p>
+    {% else %}
+        <p>You don’t have any matches configured yet.</p>
+    {% endif %}
+</body>
+</html>
