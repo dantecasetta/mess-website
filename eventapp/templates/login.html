@@ -10,30 +10,25 @@
             max-width: 500px;
             margin: 0 auto;
         }
-        
         .login-container h2 {
             color: #667eea;
             text-shadow: none;
             margin-bottom: 0.5rem;
         }
-        
         .login-container > p {
             color: #666;
             margin-bottom: 2rem;
             font-size: 1em;
         }
-        
         .form-group {
             margin-bottom: 1.5rem;
         }
-        
         .form-group label {
             display: block;
             color: #333;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
-        
         .form-group input {
             width: 100%;
             padding: 0.75rem;
@@ -42,12 +37,10 @@
             font-size: 1em;
             transition: border-color 0.3s ease;
         }
-        
         .form-group input:focus {
             outline: none;
             border-color: #667eea;
         }
-        
         button {
             background: linear-gradient(135deg, #ff1744 0%, #ff5252 100%);
             color: white;
@@ -61,18 +54,15 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 4px 15px rgba(255, 23, 68, 0.4);
         }
-        
         button:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 25px rgba(255, 23, 68, 0.6);
         }
-        
         .signup-link {
             text-align: center;
             margin-top: 1.5rem;
             color: #333;
         }
-        
         .signup-link a {
             color: #ff1744;
         }
@@ -81,6 +71,10 @@
     <div class="login-container">
         <h2>Welcome Back 💘</h2>
         <p>Log in to view your personality category and matches.</p>
+
+        {% if form.errors %}
+            <p style="color: red;">Invalid username or password. Please try again.</p>
+        {% endif %}
 
         <form method="post">
             {% csrf_token %}
@@ -100,21 +94,4 @@
 
         <p class="signup-link">Don't have an account? <a href="{% url 'signup' %}">Sign up</a>.</p>
     </div>
-{% endblock %}
-
-{% block content %}
-    <h2>Log in to your matchmaking profile ❤️</h2>
-
-    {% if form.errors %}
-        <p style="color: red;">Invalid username or password. Please try again.</p>
-    {% endif %}
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-
-        <button type="submit">Log in</button>
-    </form>
-
-    <p>Need an account? <a href="{% url 'signup' %}">Sign up here</a>.</p>
 {% endblock %}
