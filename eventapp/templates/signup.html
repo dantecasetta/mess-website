@@ -1,14 +1,121 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Create your Valentine account 💌</h2>
+    <style>
+        .signup-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .signup-container h2 {
+            color: #667eea;
+            text-shadow: none;
+            margin-bottom: 0.5rem;
+        }
+        
+        .signup-container > p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1em;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-group ul {
+            list-style: none;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        .form-group li {
+            margin-bottom: 0.5rem;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #ff1744 0%, #ff5252 100%);
+            color: white;
+            padding: 1rem;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 23, 68, 0.4);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 23, 68, 0.6);
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #333;
+        }
+        
+        .login-link a {
+            color: #ff1744;
+        }
+    </style>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <div class="signup-container">
+        <h2>Create your Valentine account 💌</h2>
+        <p>Join us and discover your perfect match!</p>
 
-        <button type="submit">Sign up</button>
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <div style="color: #dc3545; font-size: 0.9em; margin-top: 0.3rem;">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                    {% if field.help_text %}
+                        <div style="color: #666; font-size: 0.85em; margin-top: 0.3rem;">
+                            {{ field.help_text|safe }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <button type="submit">Sign up</button>
+        </form>
 
-    <p>Already have an account? <a href="{% url 'login' %}">Log in</a>.</p>
+        <p class="login-link">Already have an account? <a href="{% url 'login' %}">Log in</a>.</p>
+    </div>
 {% endblock %}

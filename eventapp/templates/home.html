@@ -11,15 +11,176 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Welcome to the Matchmaking Event 💘</h2>
-    <p>This will be your Valentine’s Day matchmaking portal.</p>
+    <style>
+        .welcome-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(244, 67, 54, 0.2);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .welcome-container::before {
+            content: "🌹";
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 3em;
+            opacity: 0.5;
+            animation: bounce 3s ease-in-out infinite;
+        }
+        
+        .welcome-container::after {
+            content: "🌹";
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3em;
+            opacity: 0.5;
+            animation: bounce 3s ease-in-out infinite 0.5s;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .welcome-container h2 {
+            font-size: 2.8em;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            color: #e91e63;
+        }
+        
+        .welcome-container p {
+            font-size: 1.3em;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            color: #333;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(233, 30, 99, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #f44336 0%, #ef5350 100%);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(244, 67, 54, 0.4);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(244, 67, 54, 0.15);
+            border-color: #f48fb1;
+        }
+        
+        .feature-card h3 {
+            color: #e91e63;
+            margin-bottom: 1rem;
+            font-size: 1.8em;
+            text-shadow: none;
+        }
+        
+        .feature-card p {
+            color: #666;
+            margin: 0;
+        }
+        
+        .feature-emoji {
+            font-size: 3em;
+            margin-bottom: 1rem;
+            display: block;
+        }
+    </style>
 
-    {% if user.is_authenticated %}
-        <p>Ready to see your matches? Go to your <a href="{% url 'dashboard' %}">dashboard</a>.</p>
-    {% else %}
-        <p>
-            <a href="{% url 'signup' %}">Create an account</a> or
-            <a href="{% url 'login' %}">log in</a> to join the event.
-        </p>
-    {% endif %}
+    <div class="welcome-container">
+        <h2>Find Your Perfect Match 💕</h2>
+        <p>Discover your personality type and find your Valentine match!</p>
+        
+        {% if user.is_authenticated %}
+            <p style="font-size: 1.1em;">Ready to see your category? 👉</p>
+            <div class="action-buttons">
+                <a href="{% url 'dashboard' %}" class="btn">💝 View My Dashboard</a>
+            </div>
+        {% else %}
+            <p style="font-size: 1.1em;">Join us for the ultimate Valentine's experience! 💌</p>
+            <div class="action-buttons">
+                <a href="{% url 'signup' %}" class="btn">💕 Create Account</a>
+                <a href="{% url 'login' %}" class="btn btn-secondary">🔐 Log In</a>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <span class="feature-emoji">💭</span>
+            <h3>Take the Quiz</h3>
+            <p>Answer 9 thoughtful questions about your personality, preferences, and romantic style.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-emoji">🎨</span>
+            <h3>Get Your Color</h3>
+            <p>Discover which of 8 personality colors perfectly describes you and your style.</p>
+        </div>
+        <div class="feature-card">
+            <span class="feature-emoji">💖</span>
+            <h3>Find Your Match</h3>
+            <p>See your compatibility scores and match with others who share your personality!</p>
+        </div>
+    </div>
 {% endblock %}

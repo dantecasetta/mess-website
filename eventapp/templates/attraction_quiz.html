@@ -12,7 +12,7 @@
         }
         
         .quiz-container h2 {
-            color: #667eea;
+            color: #e91e63;
             text-shadow: none;
             margin-bottom: 0.5rem;
         }
@@ -28,7 +28,7 @@
             padding: 1.5rem;
             background: #f8f9fa;
             border-radius: 10px;
-            border-left: 4px solid #667eea;
+            border-left: 4px solid #e91e63;
         }
         
         .form-group label {
@@ -60,7 +60,7 @@
         }
         
         button {
-            background: linear-gradient(135deg, #ff1744 0%, #ff5252 100%);
+            background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
             color: white;
             padding: 1rem 2.5rem;
             font-size: 1.1em;
@@ -70,12 +70,12 @@
             cursor: pointer;
             width: 100%;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 23, 68, 0.4);
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
         }
         
         button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 23, 68, 0.6);
+            box-shadow: 0 8px 25px rgba(233, 30, 99, 0.4);
         }
         
         .messages {
@@ -88,8 +88,8 @@
     </style>
 
     <div class="quiz-container">
-        <h2>Personality Quiz 💌</h2>
-        <p>Answer honestly! You can only submit this once. Rate each statement from 1-5.</p>
+        <h2>What Type Attracts You? 💕</h2>
+        <p>Tell us what personality traits you find attractive! You can only submit this once. Rate each preference from 1-5.</p>
 
         {% if messages %}
             <div class="messages">
@@ -107,7 +107,7 @@
                     {{ field }}
                 </div>
             {% endfor %}
-            <button type="submit">Submit my answers</button>
+            <button type="submit">Save my preferences</button>
         </form>
     </div>
 {% endblock %}

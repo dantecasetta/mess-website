@@ -2,76 +2,244 @@
 
 {% block content %}
     <style>
-        .light {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            animation: fadeIn 0.6s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dashboard-header h2 {
+            color: #e91e63;
+        }
+        
+        .dashboard-header p {
+            color: #e91e63;
+            font-weight: 600;
+        }
+        
+        .quiz-status {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.6), rgba(129, 199, 132, 0.6));
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            color: white;
+        }
+        
+        .quiz-status.incomplete {
+            background: linear-gradient(135deg, rgba(255, 152, 0, 0.5), rgba(255, 193, 7, 0.5));
+            color: white;
+            border: 1px solid rgba(255, 152, 0, 0.2);
+        }
+        
+        .quiz-status.complete {
+            background: linear-gradient(135deg, rgba(244, 67, 54, 0.6), rgba(229, 57, 53, 0.6));
+            color: white;
+            border: 1px solid rgba(244, 67, 54, 0.2);
+        }
+        
+        .category-box {
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            color: #333;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 2rem 0;
+            border: 3px solid rgba(233, 30, 99, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Category color backgrounds */
+        .category-box.white {
+            background: rgba(245, 245, 245, 0.95);
+            border-color: rgba(189, 189, 189, 0.3);
+        }
+        
+        .category-box.beige {
+            background: rgba(255, 248, 240, 0.95);
+            border-color: rgba(210, 180, 140, 0.3);
+        }
+        
+        .category-box.gray {
+            background: rgba(240, 240, 240, 0.95);
+            border-color: rgba(158, 158, 158, 0.3);
+        }
+        
+        .category-box.green {
+            background: rgba(232, 245, 233, 0.95);
+            border-color: rgba(76, 175, 80, 0.3);
+        }
+        
+        .category-box.black {
+            background: rgba(245, 245, 245, 0.95);
+            border-color: rgba(66, 66, 66, 0.3);
+        }
+        
+        .category-box.pink {
+            background: rgba(252, 228, 236, 0.95);
+            border-color: rgba(233, 30, 99, 0.3);
+        }
+        
+        .category-box.blue {
+            background: rgba(227, 242, 253, 0.95);
+            border-color: rgba(33, 150, 243, 0.3);
+        }
+        
+        .category-box.red {
+            background: rgba(255, 235, 238, 0.95);
+            border-color: rgba(244, 67, 54, 0.3);
+        }
+        
+        .category-box::before {
+            content: "💕";
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 2.5em;
+            opacity: 0.3;
+            animation: rotate 4s linear infinite;
+        }
+        
+        .category-box::after {
+            content: "💖";
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 2.5em;
+            opacity: 0.3;
+            animation: rotate 4s linear infinite reverse;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .category-box h2 {
+            font-size: 3em;
+            text-transform: capitalize;
+            margin: 0 0 1.5rem 0;
+            position: relative;
+            z-index: 1;
+            color: #e91e63;
+            text-shadow: none;
+        }
+        
+        .score-container {
+            margin-top: 2rem;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(233, 30, 99, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .score-container p {
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-bottom: 1.5rem;
+            color: #e91e63;
+        }
+        
+        .score-item {
+            margin: 1.2rem 0;
+            font-size: 1.15em;
+            padding: 0.8rem;
+            background: rgba(244, 67, 54, 0.08);
+            border-radius: 10px;
+            border-left: 4px solid rgba(233, 30, 99, 0.5);
+            transition: all 0.3s ease;
+            color: #222;
+        }
+        
+        .score-item:hover {
+            background: rgba(244, 67, 54, 0.1);
+            transform: translateX(10px);
+        }
+        
+        .take-quiz-btn {
             display: inline-block;
-            margin-right: 8px;
-            border: 2px solid #444;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #e91e63, #f06292);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+            margin-top: 1rem;
         }
-        .light-off {
-            background-color: #777;
-        }
-        .light-on {
-            background-color: #4caf50;
-        }
-        .match-light-row {
-            display: flex;
-            align-items: center;
-            margin: 4px 0;
-        }
-        .match-light-row span {
-            margin-left: 4px;
+        
+        .take-quiz-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
         }
     </style>
 
-    <h2>Your Valentine Dashboard 🌹</h2>
+    <div class="dashboard-header">
+        <h2>Welcome, {{ user.username }}! 👋</h2>
+        <p style="font-size: 1.1em; margin-top: 0.5rem;">Your Valentine Profile 💌</p>
+    </div>
 
-    <p>Welcome, {{ user.username }}!</p>
-
-    <h3>Your Personality Quiz 💭</h3>
+    <h3 style="color: #e91e63;">💭 Your Personality Quiz Status</h3>
     {% if has_quiz %}
-        <p>✅ You’ve already submitted your personality quiz. Thank you!</p>
+        <div class="quiz-status complete">
+            <p style="margin: 0;">✅ Quiz Complete! You've unlocked your personality profile!</p>
+        </div>
     {% else %}
-        <p>You haven't taken the quiz yet.</p>
-        <p><a href="{% url 'personality_quiz' %}">Take your personality quiz now</a></p>
+        <div class="quiz-status incomplete">
+            <p style="margin: 0;">⏳ You haven't taken the quiz yet.</p>
+            <a href="{% url 'personality_quiz' %}" class="take-quiz-btn">Take the Quiz Now 🚀</a>
+        </div>
     {% endif %}
 
-    <h3>Your Top 3 Matches 💘</h3>
-    {% if has_matches %}
-        <ol>
-            {% for result in matches %}
-                <li>
-                    {{ result.match.username }}
-                    (score: {{ result.score|floatformat:2 }})
-                </li>
-            {% endfor %}
-        </ol>
+    <h3 style="color: #e91e63;">💑 What You're Attracted To</h3>
+    {% if has_attraction_quiz %}
+        <div class="quiz-status complete">
+            <p style="margin: 0;">✅ Attraction Quiz Complete! Your preferences are saved!</p>
+        </div>
     {% else %}
-        <p>Matches are not available yet.</p>
-        <p>
-            Once enough people have completed the quiz, we’ll run the matching
-            and your top 3 matches will appear here automatically.
-        </p>
+        <div class="quiz-status incomplete">
+            <p style="margin: 0;">⏳ Tell us what personality type attracts you!</p>
+            <a href="{% url 'attraction_quiz' %}" class="take-quiz-btn">Take Attraction Quiz 💕</a>
+        </div>
     {% endif %}
 
-    <h3>Event Lights</h3>
-    {% if has_matches %}
-        {% for item in match_statuses %}
-            <div class="match-light-row">
-                <div class="light {% if item.is_checked_in %}light-on{% else %}light-off{% endif %}"></div>
-                <span>
-                    Match {{ forloop.counter }} —
-                    {% if item.is_checked_in %}
-                        Checked in ✅
-                    {% else %}
-                        Not checked in yet 🔴
-                    {% endif %}
-                </span>
-            </div>
-        {% endfor %}
+    <h3 style="color: #e91e63;">🎨 Your Personality Category</h3>
+    {% if category %}
+        <div class="category-box {{ category|lower }}">
+            <h2>{{ category }}</h2>
+            {% if calculated_weights %}
+                <div class="score-container">
+                    <p>🌟 Your Personality Scores:</p>
+                    <div class="score-item">🌍 Social Scale (AntiSocial → Social): <strong>{{ calculated_weights.0 }}/5</strong></div>
+                    <div class="score-item">🎬 Genre Preference (Books → Movies): <strong>{{ calculated_weights.1 }}/5</strong></div>
+                    <div class="score-item">💕 Romantic Scale (Less → More Romantic): <strong>{{ calculated_weights.2 }}/5</strong></div>
+                </div>
+            {% endif %}
+        </div>
     {% else %}
-        <p>Lights will appear once matches are available.</p>
+        <div class="quiz-status incomplete">
+            <p style="margin: 0;">Your color will appear once you complete the personality quiz!</p>
+        </div>
+    {% endif %}
+
+    {% if has_attraction_quiz %}
+        <h3 style="color: #e91e63;">💕 Your Attraction Match</h3>
+        <div class="category-box {{ attracted_category|lower }}">
+            <h2>Most Attracted To: {{ attracted_category }}</h2>
+            <p style="color: #666; margin-top: 1rem;">You're most compatible with people in the <strong>{{ attracted_category }}</strong> category! 💫</p>
+        </div>
     {% endif %}
 {% endblock %}
