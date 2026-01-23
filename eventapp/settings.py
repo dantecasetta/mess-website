@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-75ojryw1*$a*+pr6txp9jjd&3$*wfk4%cou8hhkq##jmeq9mti
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://mess-website-production.up.railway.app/','https://mess-website-production.up.railway.app/login/']
+CSRF_TRUSTED_ORIGINS = ['https://mess-website-production.up.railway.app']
+CSRF_COOKIE_SECURE = True
+CSRF_USE_SESSIONS = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
 # Application definition
