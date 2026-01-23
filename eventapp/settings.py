@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+
 from pathlib import Path
+import os
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,8 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'b7!v9@x2$w4z8#q1r6e0t5u3p9s7l2k8j4h6g1f3d5c7b9a0m2n4v6x8z0q2w4e6r8t0y2u4i6o8p0s2d4f6g8h0j2k4l6z8x0c2v4b6n8m0q2w4e6r8t0y2u4i6o8p0s2d4f6g8h0j2k4l6z8x0c2v4b6n8m0'
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://mess-website-production.up.railway.app']
@@ -82,10 +87,11 @@ WSGI_APPLICATION = 'matchsite.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL', 'sqlite:///' + str(BASE_DIR / 'db.sqlite3')),
+        conn_max_age=600,
+        ssl_require=True
+    )
 }
 
 
