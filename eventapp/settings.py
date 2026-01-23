@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-75ojryw1*$a*+pr6txp9jjd&3$*wfk4%cou8hhkq##jmeq9mti'
+SECRET_KEY = 'b7!v9@x2$w4z8#q1r6e0t5u3p9s7l2k8j4h6g1f3d5c7b9a0m2n4v6x8z0q2w4e6r8t0y2u4i6o8p0s2d4f6g8h0j2k4l6z8x0c2v4b6n8m0q2w4e6r8t0y2u4i6o8p0s2d4f6g8h0j2k4l6z8x0c2v4b6n8m0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -28,8 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://mess-website-production.up.railway.app']
 CSRF_COOKIE_SECURE = True
-CSRF_USE_SESSIONS = True
+SESSION_COOKIE_SECURE = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_SSL_REDIRECT = True
 
 
 # Application definition
