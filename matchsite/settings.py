@@ -23,8 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-75ojryw1*$a*+pr6txp9jjd&3$*wfk4%cou8hhkq##jmeq9mti'
 
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+# CSRF trusted origins for local and production
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    'https://mess-website-production.up.railway.app',
+]
 
 ALLOWED_HOSTS = ['*']
 
