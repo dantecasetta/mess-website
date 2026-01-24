@@ -28,8 +28,8 @@ SECRET_KEY = 'b7!v9@x2$w4z8#q1r6e0t5u3p9s7l2k8j4h6g1f3d5c7b9a0m2n4v6x8z0q2w4e6r8
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
-
+# DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://mess-website-production.up.railway.app']
 CSRF_COOKIE_SECURE = True
