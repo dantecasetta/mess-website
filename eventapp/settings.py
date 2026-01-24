@@ -15,11 +15,14 @@ from pathlib import Path
 import os
 import dj_database_url
 import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
 
+BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -96,7 +99,8 @@ DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL', 'sqlite:///' + str(BASE_DIR / 'db.sqlite3')),
         conn_max_age=600,
-        ssl_require=True
+        conn_health_checks=True,
+        ssl_require=not DEBUG  # Only require SSL in production
     )
 }
 
