@@ -4,11 +4,11 @@ from django.db import models
 
 class PersonalityQuiz(models.Model):
     LIKERT_CHOICES = [
-        (1, 'Strongly disagree'),
-        (2, 'Disagree'),
-        (3, 'Neutral'),
-        (4, 'Agree'),
-        (5, 'Strongly agree'),
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
     ]
 
     # Personality questions
