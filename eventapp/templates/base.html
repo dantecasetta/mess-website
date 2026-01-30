@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matchmaking Event 💘</title>
+    <title>Shoot Your Shot Night 💘</title>
     <style>
         * {
             margin: 0;
@@ -150,7 +150,10 @@
 </head>
 <body>
     <header>
-        <h1>💘 Valentine's Matchmaking 💘</h1>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+            <img src="{% static 'img/custom/messlogo.png' %}" alt="MESS Logo" style="height: 48px; width: auto; vertical-align: middle;">
+            <h1 style="margin: 0;">💘 MESS Shoot Your Shot Night 💘</h1>
+        </div>
         <nav>
             <a href="{% url 'home' %}">🏠 Home</a>
             {% if user.is_authenticated %}
