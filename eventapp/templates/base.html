@@ -151,9 +151,9 @@
 </head>
 <body>
     <header>
-        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
-            <img src="{% static 'img/custom/messlogo.png' %}" alt="MESS Logo" style="height: 48px; width: auto; vertical-align: middle;">
-            <h1 style="margin: 0;">💘 MESS Shoot Your Shot Night 💘</h1>
+        <div style="display: flex; align-items: stretch; justify-content: center; gap: 1rem; height: 100%;">
+            <img src="{% static 'img/custom/messlogo.png' %}" alt="MESS Logo" style="height: 100%; max-height: 100px; width: auto; object-fit: contain; display: block;">
+            <h1 style="margin: 0; display: flex; align-items: center;">💘 MESS Shoot Your Shot Night 💘</h1>
         </div>
         <nav>
             <a href="{% url 'home' %}">🏠 Home</a>
