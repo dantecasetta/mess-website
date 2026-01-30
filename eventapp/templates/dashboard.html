@@ -58,43 +58,43 @@
         
         /* Category color backgrounds */
         .category-box.Purple {
-            background: rgba(128, 0, 128, 0.95); /* Purple */
-            border-color: rgba(128, 0, 128, 0.3);
+            background: #f3e6fa; /* light purple */
+            border-color: #cba4e6;
         }
 
         .category-box.red {
-            background: rgba(244, 67, 54, 0.95); /* red */
-            border-color: rgba(244, 67, 54, 0.3);
+            background: #fdeaea; /* light red */
+            border-color: #f5bcbc;
         }
 
         .category-box.gray {
-            background: rgba(240, 240, 240, 0.95);
-            border-color: rgba(158, 158, 158, 0.3);
+            background: #f4f4f4; /* lighter gray */
+            border-color: #d3d3d3;
         }
 
         .category-box.green {
-            background: rgba(76, 175, 80, 0.95); /* green */
-            border-color: rgba(56, 142, 60, 0.3);
+            background: #e6f9ec; /* light green */
+            border-color: #b2e2c6;
         }
 
         .category-box.blue {
-            background: rgba(33, 150, 243, 0.95); /* blue */
-            border-color: rgba(33, 150, 243, 0.3);
+            background: #e3f0fb; /* light blue */
+            border-color: #b3d8f6;
         }
 
         .category-box.pink {
-            background: rgba(252, 228, 236, 0.95);
-            border-color: rgba(233, 30, 99, 0.3);
+            background: #fce4ec; /* light pink */
+            border-color: #f8bbd0;
         }
 
         .category-box.orange {
-            background: rgba(255, 152, 0, 0.95); /* orange */
-            border-color: rgba(255, 152, 0, 0.3);
+            background: #fff4e6; /* light orange */
+            border-color: #ffd6a0;
         }
 
         .category-box.beige {
-            background: #f5f5dc; /* beige */
-            border-color: #e6d8ad;
+            background: #f9f7f1; /* light beige */
+            border-color: #ede5c7;
         }
         
         .category-box::before {
@@ -219,7 +219,18 @@
     <h3 style="color: #e91e63;">🎨 Your Personality Category</h3>
     {% if category %}
         <div class="category-box {{ category|lower }}">
-            <h2>{{ category }}</h2>
+            <h2>
+                {% if category|lower == 'purple' %}Purple
+                {% elif category|lower == 'red' %}Red
+                {% elif category|lower == 'gray' %}Gray
+                {% elif category|lower == 'green' %}Green
+                {% elif category|lower == 'blue' %}Blue
+                {% elif category|lower == 'pink' %}Pink
+                {% elif category|lower == 'orange' %}Orange
+                {% elif category|lower == 'beige' %}Beige
+                {% else %}{{ category }}
+                {% endif %}
+            </h2>
             <div style="font-size: 0.9em; color: #666; margin-bottom: 0.5em;">Come to the event to find out what archetype you are</div>
             {% if calculated_weights %}
                 <div class="score-container">
@@ -239,8 +250,30 @@
     {% if has_attraction_quiz %}
         <h3 style="color: #e91e63;">💕 Your Attraction Match</h3>
         <div class="category-box {{ attracted_category|lower }}">
-            <h2>Most Attracted To: {{ attracted_category }}</h2>
-            <p style="color: #666; margin-top: 1rem;">You're most compatible with people in the <strong>{{ attracted_category }}</strong> category! 💫</p>
+            <h2>Most Attracted To: 
+                {% if attracted_category|lower == 'purple' %}Purple
+                {% elif attracted_category|lower == 'red' %}Red
+                {% elif attracted_category|lower == 'gray' %}Gray
+                {% elif attracted_category|lower == 'green' %}Green
+                {% elif attracted_category|lower == 'blue' %}Blue
+                {% elif attracted_category|lower == 'pink' %}Pink
+                {% elif attracted_category|lower == 'orange' %}Orange
+                {% elif attracted_category|lower == 'beige' %}Beige
+                {% else %}{{ attracted_category }}
+                {% endif %}
+            </h2>
+            <p style="color: #666; margin-top: 1rem;">You're most compatible with people in the <strong>
+                {% if attracted_category|lower == 'purple' %}Purple
+                {% elif attracted_category|lower == 'red' %}Red
+                {% elif attracted_category|lower == 'gray' %}Gray
+                {% elif attracted_category|lower == 'green' %}Green
+                {% elif attracted_category|lower == 'blue' %}Blue
+                {% elif attracted_category|lower == 'pink' %}Pink
+                {% elif attracted_category|lower == 'orange' %}Orange
+                {% elif attracted_category|lower == 'beige' %}Beige
+                {% else %}{{ attracted_category }}
+                {% endif %}
+            </strong> category! 💫</p>
         </div>
     {% endif %}
 {% endblock %}
