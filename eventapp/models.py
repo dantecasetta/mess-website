@@ -29,14 +29,14 @@ class PersonalityQuiz(models.Model):
     # Category 1: Books (1) -> Movies (5)  
     # Category 2: Less Romantic (1) -> More Romantic (5)
     CATEGORY_GROUPS = {
-        'white': {'weights': [5.0, 5.0, 5.0], 'description': 'Social, Movies, More Romantic'},
-        'beige': {'weights': [2.5, 2.5, 2.5], 'description': 'Balanced'},
+        'Purple': {'weights': [5.0, 5.0, 5.0], 'description': 'Social, Movies, More Romantic'},
+        'red': {'weights': [3, 3, 3], 'description': 'Balanced'},
         'gray': {'weights': [1.0, 1.0, 1.0], 'description': 'AntiSocial, Books, Less Romantic'},
         'green': {'weights': [4.0, 2.0, 5.0], 'description': 'Social, Books, More Romantic'},
-        'black': {'weights': [5.0, 5.0, 1.0], 'description': 'Social, Movies, Less Romantic'},
+        'blue': {'weights': [5.0, 5.0, 1.0], 'description': 'Social, Movies, Less Romantic'},
         'pink': {'weights': [2.0, 1.0, 5.0], 'description': 'Moderate Social, Books, More Romantic'},
-        'blue': {'weights': [1.0, 5.0, 1.0], 'description': 'AntiSocial, Movies, Less Romantic'},
-        'red': {'weights': [3.0, 4.0, 1.5], 'description': 'Moderate Social, Movies, Less Romantic'},
+        'orange': {'weights': [1.0, 5.0, 1.0], 'description': 'AntiSocial, Movies, Less Romantic'},
+        'beige': {'weights': [3.0, 4.0, 2], 'description': 'Moderate Social, Movies, Less Romantic'},
     }
 
     user = models.OneToOneField(
@@ -223,4 +223,5 @@ class AttractionQuiz(models.Model):
         if self.answers and len(self.answers) >= 3:
             self.calculate_preferences()
             self.find_most_attracted_category()
+            print(f"[DEBUG] AttractionQuiz: answers={self.answers}, preferences={self.preferences}, most_attracted_category={self.most_attracted_category}")
         super().save(*args, **kwargs)
