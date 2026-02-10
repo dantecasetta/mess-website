@@ -138,3 +138,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'dashboard'   # where to go after login
 LOGOUT_REDIRECT_URL = 'home'       # where to go after logout
 LOGIN_URL = 'login'                # used by @login_required
+
+# Use WhiteNoise to serve static files in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
